@@ -1,0 +1,266 @@
+<ion-view view-title="魔方简历">
+  <ion-content class="resume-content">
+    <div class="card resume-text">
+      <div class="item item-button-right balanced item-title">
+        <h3 class="define-title">基本信息</h3>
+        <label class="energized resume-score">简历完整度 <i class="icon ion-help-circled icon-large"></i> <span>50%</span></label>
+        <button class="button button-clear button-balanced" ng-click="handleInfo.basicInfo()">
+          <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+        </button>
+      </div>
+      <div class="row">
+        <div class="col col-25">
+          <img class="resume-photo" ng-src="{{ resumeData.avatarUrl || 'img/photo.png' }}" width="60" height="60" alt="photo">
+        </div>
+        <div class="col col-75">
+          <div class="row">
+            <div class="col col-33" ng-bind="resumeData.name"></div>
+            <div class="col col-67"> <span ng-bind="resumeData.gender"></span>&nbsp;&nbsp;<span class="balanced"> | </span> &nbsp;&nbsp;<span ng-bind="resumeData.age || '22岁'"></span></div>
+          </div>
+          <div class="row">
+            <div class="col col-33">
+              <i class="icons-resume resume-info-location"></i>
+              <span ng-bind="resumeData.location"></span>
+            </div>
+            <div class="col col-33">
+              <i class="icons-resume resume-info-exp"></i>
+              <span ng-bind="resumeData.workingExp"></span>
+            </div>
+            <div class="col col-33">
+              <i class="icons-resume resume-info-degree"></i>
+              <span ng-bind="resumeData.degree"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-90 col-offset-10 resume-contact">
+          <div class="row">
+            <div class="col col-33">手机</div>
+            <div class="col col-67"  ng-bind="resumeData.tel"></div>
+          </div>
+          <div class="row">
+            <div class="col col-33">邮箱</div>
+            <div class="col col-67" ng-bind="resumeData.email"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card resume-text">
+      <div class="item item-button-right balanced item-title">
+        <b>期望职能</b>
+        <button class="button button-clear button-balanced" ng-click="handleInfo.positionExp()">
+          <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+        </button>
+      </div>
+      <div class="row">
+        <div class="col col-offset-10 col-90">
+          <div class="row">
+            <div class="col col-33">
+              期望职能
+            </div>
+            <div class="col col-67">
+              <span ng-repeat="jobtype in resumeData.targetJobTypes" ng-bind="$index != 0 ? (' | ' + jobtype) : jobtype"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-33">
+              期望职位
+            </div>
+            <div class="col col-67">
+              <span ng-repeat="position in resumeData.targetPosition" ng-bind="$index != 0 ? (' | ' + position) : position"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-33">
+              期望地点
+            </div>
+            <div class="col col-67" ng-bind="resumeData.targetWorkLocation"></div>
+          </div>
+          <div class="row">
+            <div class="col col-33">
+              期望月薪
+            </div>
+            <div class="col col-67" ng-bind="resumeData.targetSalary"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card resume-text">
+      <div class="item item-button-right balanced item-title">
+        <b>工作经历</b>
+        <button class="button button-clear button-balanced" ng-click="handleInfo.workInfo()">
+          <i class="icons-resume resume-info-add"></i><span>新增</span>
+        </button>
+      </div>
+      <div class="resume-exp-content" ng-repeat="caree in resumeData.career">
+        <div class="row balanced" ng-show="$index == 0">
+          <div class="col col-10">
+            <i class="icons-resume resume-info-sub-add"></i>
+          </div>
+          <div class="col col-80" ng-click="handleInfo.workInfo()">
+            添加工作经历
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-10">
+            <i class="icons-resume resume-info-desc"></i>
+          </div>
+          <div class="col col-50">
+            <span ng-bind="caree.start">2015/06</span> - <span ng-bind="caree.end">2015/10</span>
+          </div>
+          <div class="col col-33 balanced" ng-click="handleInfo.workInfo($index)">
+            <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-offset-10" ng-bind="caree.companyName"></div>
+        </div>
+        <div class="row">
+          <div class="col col-offset-10" ng-bind="caree.jobName"></div>
+        </div>
+        <div class="row">
+          <div class="col col-offset-10" ng-bind="caree.jobDescription"></div>
+        </div>
+        <button class="button button-clear button-block button-icon exp-content-more">
+          <i class="icons-resume resume-info-down"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card resume-text">
+      <div class="item item-button-right balanced item-title">
+        <b>教育经历</b>
+        <button class="button button-clear button-balanced" ng-click="handleInfo.education()">
+          <i class="icons-resume resume-info-add"></i><span>新增</span>
+        </button>
+      </div>
+      <div class="resume-exp-content" ng-repeat="edu in resumeData.education">
+        <div class="row balanced" ng-show="$index == 0">
+          <div class="col col-10">
+            <i class="icons-resume resume-info-sub-add"></i>
+          </div>
+          <div class="col col-80" ng-click="handleInfo.education()">
+            添加教育经历
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-10">
+            <i class="icons-resume resume-info-desc"></i>
+          </div>
+          <div class="col col-67">
+            <span ng-bind="edu.start">2015/06</span> - <span ng-bind="edu.end">2015/10</span>
+          </div>
+          <div class="col col-20 balanced" ng-click="handleInfo.education($index)">
+            <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-offset-10"><span ng-bind="edu.schoolName"></span> ( <span ng-bind="edu.degree"></span>)</div>
+        </div>
+        <div class="row">
+          <div class="col col-offset-10" ng-bind="edu.major"></div>
+        </div>
+        <div class="row">
+          <div class="col col-offset-10" ng-bind="edu.status"></div>
+        </div>
+      </div>
+    </div>
+    <div class="resume-cut-line balanced">
+      <div class="cut-line"></div>
+      <div class="cut-desc">
+        <span><i class="icons-resume resume-info-notice"></i>完善以下信息，有助于您的预约成功率</span>
+      </div>
+    </div>
+    <div class="card resume-text">
+      <div class="item item-button-right balanced item-title">
+        <b>项目经验</b>
+        <button class="button button-clear button-balanced" ng-click="handleInfo.projectInfo()">
+          <i class="icons-resume resume-info-add"></i><span>新增</span>
+        </button>
+      </div>
+      <div class="resume-exp-content">
+        <div class="has-exp-desc" ng-repeat="project in resumeData.projects">
+          <div class="row balanced" ng-show="$index == 0">
+            <div class="col col-10">
+              <i class="icons-resume resume-info-sub-add"></i>
+            </div>
+            <div class="col col-80" ng-click="handleInfo.projectInfo()">
+              添加项目经历
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-10">
+              <i class="icons-resume resume-info-desc"></i>
+            </div>
+            <div class="col col-67" ng-bind="project.projectName">
+              听书类APP设计
+            </div>
+            <div class="col col-20 balanced" ng-click="handleInfo.projectInfo($index)">
+              <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-offset-10 col-90" ng-bind="project.responsibility"></div>
+          </div>
+          <div class="col col-offset-10 col-90" ng-bind="project.projectDescription"></div>
+          <button class="button button-clear button-block button-icon exp-content-more">
+            <i class="icons-resume resume-info-down"></i>
+          </button>
+        </div>
+        <div class="no-exp-desc" ng-show="resumeData.projects.length < 1">填写项目经验，有助于提高面试成功率！</div>
+      </div>
+    </div>
+    <div class="card resume-text">
+      <div class="item item-button-right balanced item-title">
+        <b>语言能力</b>
+        <button class="button button-clear button-balanced" ng-click="handleInfo.languageInfo()">
+          <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+        </button>
+      </div>
+      <div class="resume-exp-content">
+        <div class="has-exp-desc" ng-show="resumeData.languages">
+          <div class="row">
+            <div class="col col-offset-10">
+              <span ng-repeat="lan in resumeData.languages" ng-bind="$index != 0 ? (' ，' + lan) : lan"></span>
+            </div>
+          </div>
+        </div>
+        <div class="no-exp-desc" ng-show="!resumeData.languages">优秀的语言能力能获得面试官的青睐！</div>
+      </div>
+    </div>
+    <div class="card resume-text">
+      <div class="item item-button-right balanced item-title">
+        <b>自我评价</b>
+        <button class="button button-clear button-balanced" ng-click="handleInfo.evaluationInfo()">
+          <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+        </button>
+      </div>
+      <div class="resume-exp-content">
+        <div class="has-exp-desc" ng-show="resumeData.selfIntroduction">
+          <div class="row">
+            <div class="col col-offset-10" ng-bind="resumeData.selfIntroduction"></div>
+          </div>
+        </div>
+        <div class="no-exp-desc" ng-show="!resumeData.selfIntroduction">展示自信的一面,描述更好的自己！</div>
+      </div>
+    </div>
+    <div class="card resume-text">
+      <div class="item item-button-right balanced item-title">
+        <b>其他信息</b>
+        <button class="button button-clear button-balanced" ng-click="handleInfo.otherInfo()">
+          <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+        </button>
+      </div>
+      <div class="resume-exp-content">
+        <div class="has-exp-desc" ng-show="resumeData.otherInformation">
+          <div class="row">
+            <div class="col col-offset-10" ng-bind="resumeData.otherInformation">
+              我就是我币一样的烟火
+            </div>
+          </div>
+        </div>
+        <div class="no-exp-desc" ng-show="!resumeData.otherInformation">不一样的你有不一样的特长，和不一样的优势！</div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

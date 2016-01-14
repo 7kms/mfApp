@@ -1,0 +1,14 @@
+<ion-view view-title="自我评价">
+  <ion-content class="resume-content">
+    <div class="card evaluation-text resume-info-list">
+      <form autocomplete="off">
+          <textarea class="evaluation-desc resume-info-text-desc" placeholder="描述您对自己的自我评价" maxlength="600" required ng-model="evaluationData.selfIntroduction"></textarea>
+        <div class="padding row">
+          <div class="col col-80 col-offset-10">
+            <button type="submit" class="button button-block button-balanced" ng-click="updateEvaluation()">保存</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

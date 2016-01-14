@@ -1,0 +1,21 @@
+<ion-view view-title="语言能力">
+  <ion-content class="resume-content">
+    <div class="card language-list resume-info-list">
+      <form autocomplete="off">
+        <div class="item item-icon-right" ng-repeat="lan in lanArr" ng-class="{balanced: languageInfo.lanData[lan]}" ng-click="changeLanguage(lan)">
+          <lable>{{lan}}</lable>
+          <i class="icon ion-android-radio-button-off"></i>
+        </div>
+        <div class="item item-input item-stacked-label">
+          <ion-label>其他</ion-label>
+          <textarea class="language-desc resume-info-text-desc" placeholder="请填写其他语言能力，不同语言请用逗号隔开" ng-model="languageInfo.otherLanguage"></textarea>
+        </div>
+        <div class="padding row">
+          <div class="col col-80 col-offset-10">
+            <button type="submit" class="button button-block button-balanced" ng-click="updateLanguage()">保存</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

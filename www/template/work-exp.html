@@ -1,0 +1,34 @@
+<ion-view view-title="工作经历">
+  <ion-content class="resume-content">
+    <div class="card work-exp-list resume-info-list">
+      <form autocomplete="off">
+        <ion-input class="item item-input">
+          <ion-label>公司名称</ion-label>
+          <input type="text" placeholder="必填" required ng-model="workData.companyName">
+        </ion-input>
+        <ion-input class="item item-input">
+          <ion-label>职位名称</ion-label>
+          <input type="text" placeholder="必填" required ng-model="workData.jobName">
+        </ion-input>
+        <ion-input class="item item-input">
+          <ion-label>入职时间</ion-label>
+          <input type="text" placeholder="必选" required ng-model="workData.start">
+        </ion-input>
+        <ion-input class="item item-input">
+          <ion-label>结束时间</ion-label>
+          <input type="text" placeholder="必选" required ng-model="workData.end">
+        </ion-input>
+        <ion-input class="item item-input item-stacked-label">
+          <ion-label>在职经历</ion-label>
+          <textarea class="work-exp-desc resume-info-text-desc" placeholder="描述您在职期间的工作内容,和获得的成绩" maxlength="400" required ng-model="workData.jobDescription"></textarea>
+        </ion-input>
+         <div class="padding row">
+          <div class="col col-80 col-offset-10">
+            <button type="submit" class="button button-block button-balanced" ng-click="updateWork()">保存</button>
+            <p class="delete-notice" ng-show="deleteInfo"><span class="balanced" ng-click="deleteInfo()">删除此条工作经历经历</span></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

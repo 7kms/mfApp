@@ -1,0 +1,45 @@
+<ion-view view-title="基本信息">
+  <ion-content class="resume-content">
+    <div class="card basic-info-list resume-info-list">
+      <form autocomplete="off">
+        <div class="item item-image resume-photo">
+          <img ng-src="{{ basicData.avatarUrl }}" width="80" height="80">
+          <p>我的头像</p>
+        </div>
+        <div class="item item-input">
+          <ion-label>姓名</ion-label>
+          <input type="text" ng-model="basicData.name" placeholder="必填">
+        </div>
+        <div class="item item-input">
+          <ion-label>性别</ion-label>
+          <input type="text" ng-model="basicData.gender" placeholder="必填">
+        </div>
+        <div class="item item-input">
+          <ion-label>出生年月</ion-label>
+          <input type="text" ng-model="basicData.dob" placeholder="必填">
+        </div>
+        <div class="item item-input">
+          <ion-label>工作年限</ion-label>
+          <input type="text" ng-model="basicData.workingExp" placeholder="必填">
+        </div>
+        <div class="item item-input">
+          <ion-label>所在城市</ion-label>
+          <input type="text" ng-model="basicData.location" placeholder="必填">
+        </div>
+        <div class="item item-input">
+          <ion-label>电子邮箱</ion-label>
+          <input type="text" ng-model="basicData.email" placeholder="必填">
+        </div>
+        <div class="item item-input">
+          <ion-label>电话号码</ion-label>
+          <input type="text" ng-model="basicData.tel" placeholder="必填">
+        </div>
+        <div class="padding row">
+          <div class="col col-80 col-offset-10">
+            <button type="submit" class="button button-block button-balanced" ng-click="updateBasic()">保存</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

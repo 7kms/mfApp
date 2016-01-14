@@ -1,0 +1,16 @@
+<ion-view view-title="其他信息">
+  <ion-content class="resume-content">
+    <div class="card resume-info-list">
+      <form autocomplete="off">
+        <div class="item item-input item-stacked-label">
+          <textarea class="evaluation-desc resume-info-text-desc" placeholder="描述你的特长,获奖优势,获奖证书等信息提高自己的竞争能力" maxlength="600" required ng-model="otherInfoData.otherInformation"></textarea>
+        </div>
+        <div class="padding row">
+          <div class="col col-80 col-offset-10">
+            <button type="submit" class="button button-block button-balanced" ng-click="updateOtherInfo()">保存</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>
