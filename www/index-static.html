@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>基本信息</title>
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <link href="lib/ionic-citypicker/src/ionic-citypicker.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <!-- cordova script (this will be a 404 during development) -->
+    <!--<script src="cordova.js"></script>-->
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <script src="js/app-static.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services-static.js"></script>
+  </head>
+  <body ng-app="resumeModule">
+    <ion-nav-bar class="bar-balanced">
+      <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view></ion-nav-view>
+    <script id="education-exp.html" type="text/ng-template">
+      <ion-view view-title="教育经历">
+        <ion-content class="resume-content">
+          <div class="card education-list resume-info-list">
+            <form autocomplete="off">
+              <ion-input class="item item-input">
+                <ion-label>学校名称</ion-label>
+                <input type="text" placeholder="必填" required ng-model="eduData.schoolName">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>专业</ion-label>
+                <input type="text" placeholder="必填" required ng-model="eduData.major">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>学历</ion-label>
+                <input type="text" placeholder="必选" required ng-model="eduData.degree">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>入学时间</ion-label>
+                <input type="text" placeholder="必选" required ng-model="eduData.start">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>毕业时间</ion-label>
+                <input type="text" placeholder="必选" required ng-model="eduData.end">
+              </ion-input>
+              <ion-iput class="item item-input item-stacked-label">
+                <ion-label>在校经历</ion-label>
+                <textarea class="school-desc resume-info-text-desc" placeholder="描述您的在校经历和所获得的个人成绩400字以内" maxlength="400" required ng-model="eduData.status"></textarea>
+              </ion-iput>
+              <div class="padding row">
+                <div class="col col-80 col-offset-10">
+                  <button type="submit" class="button button-block button-balanced" ng-click="updateEdu()">保存</button>
+                  <p class="delete-notice" ng-show="deleteInfo" ng-click="deleteInfo()"><span class="balanced">删除此条教育经历</span></p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ion-content>
+      </ion-view>
+      
+    </script>
+    <script id="expect-position.html" type="text/ng-template">
+      <ion-view view-title="项目经历">
+        <ion-content class="resume-content">
+          <div class="card job-exp-list resume-info-list">
+            <form autocomplete="off">
+              <ion-input class="item item-input">
+                <ion-label>期望职能</ion-label>
+                <input type="text" placeholder="必选" required ng-model="positionExpData.targetJobTypes[0]">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>期望职位</ion-label>
+                <input type="text" placeholder="必填" required ng-model="positionExpData.targetPosition[0]">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>期望地点</ion-label>
+                <input type="text" placeholder="必选" required ng-model="positionExpData.targetWorkLocation">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>期望月薪</ion-label>
+                <input type="text" placeholder="必选" required ng-model="positionExpData.targetSalary">
+              </ion-input>
+              <div class="padding row">
+                <div class="col col-80 col-offset-10">
+                  <button type="submit" class="button button-block button-balanced" ng-click="updatePositionExp()">保存</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ion-content>
+      </ion-view>
+    </script>
+    <script id="language-info.html" type="text/ng-template">
+      <ion-view view-title="语言能力">
+        <ion-content class="resume-content">
+          <div class="card language-list resume-info-list">
+            <form autocomplete="off">
+              <div class="item item-icon-right" ng-repeat="lan in lanArr" ng-class="{balanced: languageInfo.lanData[lan]}" ng-click="changeLanguage(lan)">
+                <lable>{{lan}}</lable>
+                <i class="icon ion-android-radio-button-off"></i>
+              </div>
+              <div class="item item-input item-stacked-label">
+                <ion-label>其他</ion-label>
+                <textarea class="language-desc resume-info-text-desc" placeholder="请填写其他语言能力，不同语言请用逗号隔开" ng-model="languageInfo.otherLanguage"></textarea>
+              </div>
+              <div class="padding row">
+                <div class="col col-80 col-offset-10">
+                  <button type="submit" class="button button-block button-balanced" ng-click="updateLanguage()">保存</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ion-content>
+      </ion-view>
+    </script>
+    <script id="other-info.html" type="text/ng-template">
+      <ion-view view-title="其他信息">
+        <ion-content class="resume-content">
+          <div class="card resume-info-list">
+            <form autocomplete="off">
+              <div class="item item-input item-stacked-label">
+                <textarea class="evaluation-desc resume-info-text-desc" placeholder="描述你的特长,获奖优势,获奖证书等信息提高自己的竞争能力" maxlength="600" required ng-model="otherInfoData.otherInformation"></textarea>
+              </div>
+              <div class="padding row">
+                <div class="col col-80 col-offset-10">
+                  <button type="submit" class="button button-block button-balanced" ng-click="updateOtherInfo()">保存</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ion-content>
+      </ion-view>
+    </script>
+    <script id="project-exp.html" type="text/ng-template">
+      <ion-view view-title="项目经历">
+        <ion-content class="resume-content">
+          <div class="card project-exp-list resume-info-list">
+            <form  novalidate autocomplete="off" ng-submit="updateEdu()">
+              <ion-input class="item item-input">
+                <ion-label>项目名称</ion-label>
+                <input type="text" placeholder="请填写项目名称" required ng-model="projectData.projectName">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>项目职务</ion-label>
+                <input type="text" placeholder="请填写所担任的职务" required ng-model="projectData.responsibility">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>所在公司</ion-label>
+                <input type="text" placeholder="请填写所属公司名称" required  ng-model="projectData.companyName">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>开始时间</ion-label>
+                <input type="date" placeholder="必选" required ng-model="projectData.start">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>结束时间</ion-label>
+                <input type="text" placeholder="必选" required ng-model="projectData.end">
+              </ion-input>
+              <ion-iput class="item item-input item-stacked-label">
+                <ion-label>项目说明</ion-label>
+                <textarea class="project-desc resume-info-text-desc" placeholder="描述项目内容,工作内容" maxlength="400" required ng-model="projectData.projectDescription"></textarea>
+              </ion-iput>
+              <div class="padding row">
+                <div class="col col-80 col-offset-10">
+                  <button type="submit" class="button button-block button-balanced" ng-click="updateProject()">保存</button>
+                  <p class="delete-notice" ng-show="deleteInfo"><span class="balanced" ng-click="deleteInfo()">删除此条教育经历</span></p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ion-content>
+      </ion-view>
+    </script>
+    <script id="resume-basic-2.html" type="text/ng-template">
+      <ion-view view-title="基本信息">
+        <ion-content class="resume-content">
+          <div class="card basic-info-list resume-info-list">
+            <form autocomplete="off">
+              <div class="item item-image resume-photo">
+                <img ng-src="{{ basicData.avatarUrl }}" width="80" height="80">
+                <p>我的头像</p>
+              </div>
+              <div class="item item-input">
+                <ion-label>姓名</ion-label>
+                <input type="text" ng-model="basicData.name" placeholder="必填">
+              </div>
+              <div class="item item-input">
+                <ion-label>性别</ion-label>
+                <input type="text" ng-model="basicData.gender" placeholder="必填">
+              </div>
+              <div class="item item-input">
+                <ion-label>出生年月</ion-label>
+                <input type="text" ng-model="basicData.dob" placeholder="必填">
+              </div>
+              <div class="item item-input">
+                <ion-label>工作年限</ion-label>
+                <input type="text" ng-model="basicData.workingExp" placeholder="必填">
+              </div>
+              <div class="item item-input">
+                <ion-label>所在城市</ion-label>
+                <input type="text" ng-model="basicData.location" placeholder="必填">
+              </div>
+              <div class="item item-input">
+                <ion-label>电子邮箱</ion-label>
+                <input type="text" ng-model="basicData.email" placeholder="必填">
+              </div>
+              <div class="item item-input">
+                <ion-label>电话号码</ion-label>
+                <input type="text" ng-model="basicData.tel" placeholder="必填">
+              </div>
+              <div class="padding row">
+                <div class="col col-80 col-offset-10">
+                  <button type="submit" class="button button-block button-balanced" ng-click="updateBasic()">保存</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ion-content>
+      </ion-view>
+    </script>
+    <script id="resume-main.html" type="text/ng-template">
+      <ion-view view-title="魔方简历">
+        <ion-content class="resume-content">
+          <div class="card resume-text">
+            <div class="item item-button-right balanced item-title">
+              <h3 class="define-title">基本信息</h3>
+              <label class="energized resume-score">简历完整度 <i class="icon ion-help-circled icon-large"></i> <span>50%</span></label>
+              <button class="button button-clear button-balanced" ng-click="handleInfo.basicInfo()">
+                <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+              </button>
+            </div>
+            <div class="row">
+              <div class="col col-25">
+                <img class="resume-photo" ng-src="{{ resumeData.avatarUrl || 'img/photo.png' }}" width="60" height="60" alt="photo">
+              </div>
+              <div class="col col-75">
+                <div class="row">
+                  <div class="col col-33" ng-bind="resumeData.name"></div>
+                  <div class="col col-67"> <span ng-bind="resumeData.gender"></span>&nbsp;&nbsp;<span class="balanced"> | </span> &nbsp;&nbsp;<span ng-bind="resumeData.age || '22岁'"></span></div>
+                </div>
+                <div class="row">
+                  <div class="col col-33">
+                    <i class="icons-resume resume-info-location"></i>
+                    <span ng-bind="resumeData.location"></span>
+                  </div>
+                  <div class="col col-33">
+                    <i class="icons-resume resume-info-exp"></i>
+                    <span ng-bind="resumeData.workingExp"></span>
+                  </div>
+                  <div class="col col-33">
+                    <i class="icons-resume resume-info-degree"></i>
+                    <span ng-bind="resumeData.degree"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-90 col-offset-10 resume-contact">
+                <div class="row">
+                  <div class="col col-33">手机</div>
+                  <div class="col col-67"  ng-bind="resumeData.tel"></div>
+                </div>
+                <div class="row">
+                  <div class="col col-33">邮箱</div>
+                  <div class="col col-67" ng-bind="resumeData.email"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card resume-text">
+            <div class="item item-button-right balanced item-title">
+              <b>期望职能</b>
+              <button class="button button-clear button-balanced" ng-click="handleInfo.positionExp()">
+                <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+              </button>
+            </div>
+            <div class="row">
+              <div class="col col-offset-10 col-90">
+                <div class="row">
+                  <div class="col col-33">
+                    期望职能
+                  </div>
+                  <div class="col col-67">
+                    <span ng-repeat="jobtype in resumeData.targetJobTypes" ng-bind="$index != 0 ? (' | ' + jobtype) : jobtype"></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-33">
+                    期望职位
+                  </div>
+                  <div class="col col-67">
+                    <span ng-repeat="position in resumeData.targetPosition" ng-bind="$index != 0 ? (' | ' + position) : position"></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-33">
+                    期望地点
+                  </div>
+                  <div class="col col-67" ng-bind="resumeData.targetWorkLocation"></div>
+                </div>
+                <div class="row">
+                  <div class="col col-33">
+                    期望月薪
+                  </div>
+                  <div class="col col-67" ng-bind="resumeData.targetSalary"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card resume-text">
+            <div class="item item-button-right balanced item-title">
+              <b>工作经历</b>
+              <button class="button button-clear button-balanced" ng-click="handleInfo.workInfo()">
+                <i class="icons-resume resume-info-add"></i><span>新增</span>
+              </button>
+            </div>
+            <div class="resume-exp-content" ng-repeat="caree in resumeData.career">
+              <div class="row balanced" ng-show="$index == 0">
+                <div class="col col-10">
+                  <i class="icons-resume resume-info-sub-add"></i>
+                </div>
+                <div class="col col-80" ng-click="handleInfo.workInfo()">
+                  添加工作经历
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-10">
+                  <i class="icons-resume resume-info-desc"></i>
+                </div>
+                <div class="col col-50">
+                  <span ng-bind="caree.start">2015/06</span> - <span ng-bind="caree.end">2015/10</span>
+                </div>
+                <div class="col col-33 balanced" ng-click="handleInfo.workInfo($index)">
+                  <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-offset-10" ng-bind="caree.companyName"></div>
+              </div>
+              <div class="row">
+                <div class="col col-offset-10" ng-bind="caree.jobName"></div>
+              </div>
+              <div class="row">
+                <div class="col col-offset-10" ng-bind="caree.jobDescription"></div>
+              </div>
+              <button class="button button-clear button-block button-icon exp-content-more">
+                <i class="icons-resume resume-info-down"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card resume-text">
+            <div class="item item-button-right balanced item-title">
+              <b>教育经历</b>
+              <button class="button button-clear button-balanced" ng-click="handleInfo.education()">
+                <i class="icons-resume resume-info-add"></i><span>新增</span>
+              </button>
+            </div>
+            <div class="resume-exp-content" ng-repeat="edu in resumeData.education">
+              <div class="row balanced" ng-show="$index == 0">
+                <div class="col col-10">
+                  <i class="icons-resume resume-info-sub-add"></i>
+                </div>
+                <div class="col col-80" ng-click="handleInfo.education()">
+                  添加教育经历
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-10">
+                  <i class="icons-resume resume-info-desc"></i>
+                </div>
+                <div class="col col-67">
+                  <span ng-bind="edu.start">2015/06</span> - <span ng-bind="edu.end">2015/10</span>
+                </div>
+                <div class="col col-20 balanced" ng-click="handleInfo.education($index)">
+                  <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-offset-10"><span ng-bind="edu.schoolName"></span> ( <span ng-bind="edu.degree"></span>)</div>
+              </div>
+              <div class="row">
+                <div class="col col-offset-10" ng-bind="edu.major"></div>
+              </div>
+              <div class="row">
+                <div class="col col-offset-10" ng-bind="edu.status"></div>
+              </div>
+            </div>
+          </div>
+          <div class="resume-cut-line balanced">
+            <div class="cut-line"></div>
+            <div class="cut-desc">
+              <span><i class="icons-resume resume-info-notice"></i>完善以下信息，有助于您的预约成功率</span>
+            </div>
+          </div>
+          <div class="card resume-text">
+            <div class="item item-button-right balanced item-title">
+              <b>项目经验</b>
+              <button class="button button-clear button-balanced" ng-click="handleInfo.projectInfo()">
+                <i class="icons-resume resume-info-add"></i><span>新增</span>
+              </button>
+            </div>
+            <div class="resume-exp-content">
+              <div class="has-exp-desc" ng-repeat="project in resumeData.projects">
+                <div class="row balanced" ng-show="$index == 0">
+                  <div class="col col-10">
+                    <i class="icons-resume resume-info-sub-add"></i>
+                  </div>
+                  <div class="col col-80" ng-click="handleInfo.projectInfo()">
+                    添加项目经历
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-10">
+                    <i class="icons-resume resume-info-desc"></i>
+                  </div>
+                  <div class="col col-67" ng-bind="project.projectName">
+                    听书类APP设计
+                  </div>
+                  <div class="col col-20 balanced" ng-click="handleInfo.projectInfo($index)">
+                    <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-offset-10 col-90" ng-bind="project.responsibility"></div>
+                </div>
+                <div class="col col-offset-10 col-90" ng-bind="project.projectDescription"></div>
+                <button class="button button-clear button-block button-icon exp-content-more">
+                  <i class="icons-resume resume-info-down"></i>
+                </button>
+              </div>
+              <div class="no-exp-desc" ng-show="resumeData.projects.length < 1">填写项目经验，有助于提高面试成功率！</div>
+            </div>
+          </div>
+          <div class="card resume-text">
+            <div class="item item-button-right balanced item-title">
+              <b>语言能力</b>
+              <button class="button button-clear button-balanced" ng-click="handleInfo.languageInfo()">
+                <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+              </button>
+            </div>
+            <div class="resume-exp-content">
+              <div class="has-exp-desc" ng-show="resumeData.languages">
+                <div class="row">
+                  <div class="col col-offset-10">
+                    <span ng-repeat="lan in resumeData.languages" ng-bind="$index != 0 ? (' ，' + lan) : lan"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="no-exp-desc" ng-show="!resumeData.languages">优秀的语言能力能获得面试官的青睐！</div>
+            </div>
+          </div>
+          <div class="card resume-text">
+            <div class="item item-button-right balanced item-title">
+              <b>自我评价</b>
+              <button class="button button-clear button-balanced" ng-click="handleInfo.evaluationInfo()">
+                <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+              </button>
+            </div>
+            <div class="resume-exp-content">
+              <div class="has-exp-desc" ng-show="resumeData.selfIntroduction">
+                <div class="row">
+                  <div class="col col-offset-10" ng-bind="resumeData.selfIntroduction"></div>
+                </div>
+              </div>
+              <div class="no-exp-desc" ng-show="!resumeData.selfIntroduction">展示自信的一面,描述更好的自己！</div>
+            </div>
+          </div>
+          <div class="card resume-text">
+            <div class="item item-button-right balanced item-title">
+              <b>其他信息</b>
+              <button class="button button-clear button-balanced" ng-click="handleInfo.otherInfo()">
+                <i class="icons-resume resume-info-edit"></i><span>编辑</span>
+              </button>
+            </div>
+            <div class="resume-exp-content">
+              <div class="has-exp-desc" ng-show="resumeData.otherInformation">
+                <div class="row">
+                  <div class="col col-offset-10" ng-bind="resumeData.otherInformation">
+                    我就是我币一样的烟火
+                  </div>
+                </div>
+              </div>
+              <div class="no-exp-desc" ng-show="!resumeData.otherInformation">不一样的你有不一样的特长，和不一样的优势！</div>
+            </div>
+          </div>
+        </ion-content>
+      </ion-view>
+    </script>
+    <script id="self-evaluation.html" type="text/ng-template">
+      <ion-view view-title="自我评价">
+        <ion-content class="resume-content">
+          <div class="card evaluation-text resume-info-list">
+            <form autocomplete="off">
+              <textarea class="evaluation-desc resume-info-text-desc" placeholder="描述您对自己的自我评价" maxlength="600" required ng-model="evaluationData.selfIntroduction"></textarea>
+              <div class="padding row">
+                <div class="col col-80 col-offset-10">
+                  <button type="submit" class="button button-block button-balanced" ng-click="updateEvaluation()">保存</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ion-content>
+      </ion-view>
+
+    </script>
+    <script id="work-exp.html" type="text/ng-template">
+      <ion-view view-title="工作经历">
+        <ion-content class="resume-content">
+          <div class="card work-exp-list resume-info-list">
+            <form autocomplete="off">
+              <ion-input class="item item-input">
+                <ion-label>公司名称</ion-label>
+                <input type="text" placeholder="必填" required ng-model="workData.companyName">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>职位名称</ion-label>
+                <input type="text" placeholder="必填" required ng-model="workData.jobName">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>入职时间</ion-label>
+                <input type="text" placeholder="必选" required ng-model="workData.start">
+              </ion-input>
+              <ion-input class="item item-input">
+                <ion-label>结束时间</ion-label>
+                <input type="text" placeholder="必选" required ng-model="workData.end">
+              </ion-input>
+              <ion-input class="item item-input item-stacked-label">
+                <ion-label>在职经历</ion-label>
+                <textarea class="work-exp-desc resume-info-text-desc" placeholder="描述您在职期间的工作内容,和获得的成绩" maxlength="400" required ng-model="workData.jobDescription"></textarea>
+              </ion-input>
+              <div class="padding row">
+                <div class="col col-80 col-offset-10">
+                  <button type="submit" class="button button-block button-balanced" ng-click="updateWork()">保存</button>
+                  <p class="delete-notice" ng-show="deleteInfo"><span class="balanced" ng-click="deleteInfo()">删除此条工作经历经历</span></p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ion-content>
+      </ion-view>
+    </script>
+  </body>
+  <script src="lib/ionic-citypicker/src/ionic-citypicker.js"></script>
+  <script src="lib/ionic-citypicker/src/ionic-citydata.js"></script>
+
+</html>

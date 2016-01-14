@@ -1,74 +1,7 @@
 mfApp
-  .factory("resumeObj",function(){
+  .factory("resumeObj",["$http",function($http){
     var resumeHandle = {
-      resumeData: {
-        "qq": "45332432",
-        "workingExp": "3-5年",
-        "name": "youbusi",
-        "dob": "1990年09月",
-        "gender": "男",
-        "avatarUrl": "img/photo.png",
-        "id": 120,
-        "career": [
-          {
-            "start": "2015年10月",
-            "jobDescription": "各种测试",
-            "end": "至今",
-            "companyName": "ibm",
-            "jobName": "测试工程师"
-          },
-          {
-            "start": "2015年10月",
-            "jobDescription": "各种dadadad测试",
-            "end": "至今",
-            "companyName": "ibm",
-            "jobName": "测试工dadad程师"
-          }
-        ],
-        "targetWorkLocation": "北京",
-        "targetPosition": [
-          "高级软件工程师、"
-        ],
-        "location": "北京-朝阳",
-        "targetSalary": "343",
-        "education": [
-          {
-            "status": "未毕业实习",
-            "major": "dsfds",
-            "end": "2006/03",
-            "degree": "博士",
-            "schoolName": "斯坦福大学",
-            "isTongzhao": "是",
-            "start": "2005/06"
-          }
-        ],
-        "email": "360079162@qq.com",
-        "projects": [
-          {
-            "start": "2013/02",
-            "end": "2014/07",
-            "companyName" : "北京畅通",
-            "responsibility": "担任高级软件工程师，分解架构师所设计的架构，实现主要核心功能",
-            "projectName": "网站架构设计",
-            "projectDescription": "无"
-          },
-          {
-            "start": "2005/06",
-            "end": "2009/07",
-            "companyName" : "北京畅游",
-            "responsibility": "修理自行车",
-            "projectName": "自行车修理",
-            "projectDescription": "无"
-          }
-        ],
-        "targetJobTypes": [
-          "客服类",
-          "财务类"
-        ],
-        "selfIntroduction":"我就是我,币一样的烟火",
-        "languages":["英语","法语","德语","韩语","西班牙语,阿拉伯语"],
-        "otherInformation":"我就是我,币一样的烟火"
-      },
+      resumeData: {},
       updateInfo: function(){
         console.log(this.resumeData);
       }
@@ -78,7 +11,7 @@ mfApp
         angular.copy(data,resumeHandle.resumeData);
       });
     return resumeHandle;
-  })
+  }])
   .factory("currentCityService",function(){
     return {
       currentCity: ""

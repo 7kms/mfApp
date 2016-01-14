@@ -8,50 +8,50 @@ mfApp.config(["$stateProvider","$urlRouterProvider",function($stateProvider,$url
       $stateProvider
       .state("index",{
         url:"/resume-main",
-        templateUrl:"resume-main.html",
+        templateUrl:"template/resume-main.html",
         controller: "resumeControl"
       })
       .state("basic",{
         url:"/resume-basic",
-        templateUrl:"resume-basic-2.html",
+        templateUrl:"template/resume-basic-2.html",
         controller: "basicControl"
       })
       .state("education",{
         url: "/education-exp/:index",
-        templateUrl: "education-exp.html",
+        templateUrl: "template/education-exp.html",
         params: {"index": ""},
         controller : "eduControl"
       })
       .state("project",{
         url:"/project-exp/:index",
-        templateUrl:"project-exp.html",
+        templateUrl:"template/project-exp.html",
         params: {"index": ""},
         controller: "projectControl"
       })
       .state("work",{
         url:"/work-exp/:index",
-        templateUrl:"work-exp.html",
+        templateUrl:"template/work-exp.html",
         params: {"index": ""},
         controller: "workControl"
       })
       .state("position",{
         url: "/expect-position",
-        templateUrl: "expect-position.html",
+        templateUrl: "template/expect-position.html",
         controller : "positionExpControl"
       })
       .state("evaluation",{
         url:"/self-evaluation",
-        templateUrl:"self-evaluation.html",
+        templateUrl:"template/self-evaluation.html",
         controller: "evaluatControl"
       })
       .state("other",{
         url:"/other-info",
-        templateUrl:"other-info.html",
+        templateUrl:"template/other-info.html",
         controller: "otherControl"
       })
       .state("language",{
         url:"/language-info",
-        templateUrl:"language-info.html",
+        templateUrl:"template/language-info.html",
         controller: "languageControl"
       });
       $urlRouterProvider.otherwise("/resume-main");
