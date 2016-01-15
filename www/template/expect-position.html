@@ -1,7 +1,7 @@
 <ion-view view-title="项目经历">
   <ion-content class="resume-content">
     <div class="card job-exp-list resume-info-list">
-      <form autocomplete="off">
+      <form autocomplete="off" name="resPositionForm">
         <ion-input class="item item-input">
           <ion-label>期望职能</ion-label>
           <input type="text" placeholder="必选" required ng-model="positionExpData.targetJobTypes[0]">
@@ -20,7 +20,7 @@
         </ion-input>
          <div class="padding row">
           <div class="col col-80 col-offset-10">
-            <button type="submit" class="button button-block button-balanced" ng-click="updatePositionExp()">保存</button>
+            <button type="submit" class="button button-block button-balanced" ng-disabled="!resPositionForm.$valid" ng-click="updatePositionExp()">保存</button>
           </div>
         </div>
       </form>

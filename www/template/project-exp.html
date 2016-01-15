@@ -1,7 +1,7 @@
 <ion-view view-title="项目经历">
   <ion-content class="resume-content">
     <div class="card project-exp-list resume-info-list">
-      <form  novalidate autocomplete="off" ng-submit="updateEdu()">
+      <form name="resProForm" autocomplete="off">
         <ion-input class="item item-input">
           <ion-label>项目名称</ion-label>
           <input type="text" placeholder="请填写项目名称" required ng-model="projectData.projectName">
@@ -16,7 +16,7 @@
         </ion-input>
         <ion-input class="item item-input">
           <ion-label>开始时间</ion-label>
-          <input type="date" placeholder="必选" required ng-model="projectData.start">
+          <input type="text" placeholder="必选" required ng-model="projectData.start">
         </ion-input>
         <ion-input class="item item-input">
           <ion-label>结束时间</ion-label>
@@ -28,7 +28,7 @@
         </ion-iput>
          <div class="padding row">
           <div class="col col-80 col-offset-10">
-            <button type="submit" class="button button-block button-balanced" ng-click="updateProject()">保存</button>
+            <button type="submit" class="button button-block button-balanced" ng-disabled="!resProForm.$valid" ng-click="updateProject()">保存</button>
             <p class="delete-notice" ng-show="deleteInfo"><span class="balanced" ng-click="deleteInfo()">删除此条教育经历</span></p>
           </div>
         </div>

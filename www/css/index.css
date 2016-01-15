@@ -35,8 +35,17 @@
     .resume-content .card.resume-text {
       color: #535353;
       font-size: 16px; }
-      .resume-content .card.resume-text .res-basic-lable:not(:last-child) {
-        margin-right: 10%; }
+      .resume-content .card.resume-text .res-exp-info-content {
+        position: relative; }
+        .resume-content .card.resume-text .res-exp-info-content::before {
+          content: "";
+          position: absolute;
+          top: 24px;
+          left: 22px;
+          bottom: 14px;
+          border-left: 1px dashed #5cddca; }
+      .resume-content .card.resume-text .res-basic-lable {
+        min-width: 70px; }
       .resume-content .card.resume-text .resume-photo {
         width: 60px;
         height: 60px;
@@ -49,8 +58,27 @@
         font-size: 14px;
         text-align: center;
         color: #c2c2c2; }
+      .resume-content .card.resume-text .resume-exp-info .resume-exp-item {
+        min-height: 30px;
+        line-height: 30px;
+        margin: 0 4%; }
+        .resume-content .card.resume-text .resume-exp-info .resume-exp-item.no-icon {
+          padding-left: 24px; }
+        .resume-content .card.resume-text .resume-exp-info .resume-exp-item.res-exp-desc {
+          color: #9d9d9d; }
+        .resume-content .card.resume-text .resume-exp-info .resume-exp-item .resume-info-sub-add {
+          margin-left: 2px; }
+        .resume-content .card.resume-text .resume-exp-info .resume-exp-item .exp-btn-add {
+          padding: 0; }
+        .resume-content .card.resume-text .resume-exp-info .resume-exp-item .exp-item-btn {
+          float: right;
+          height: 30px;
+          line-height: 30px; }
     .resume-content .card .exp-content-more {
-      margin-top: -20px; }
+      margin-top: -20px;
+      width: 80px;
+      left: 50%;
+      margin-left: -40px; }
   .resume-content .resume-cut-line {
     margin-top: 30px; }
     .resume-content .resume-cut-line .cut-line {
@@ -63,7 +91,7 @@
       .resume-content .resume-cut-line .cut-desc span {
         display: inline-block;
         padding: 0 10px;
-        background-color: #fff; }
+        background-color: #e5ebeb; }
 
 .icons-resume {
   display: inline-block;
@@ -95,7 +123,16 @@
   background-position: -20px -40px; }
 
 .icons-resume.resume-info-down {
-  background-position: -40px -40px; }
+  background-position: -40px -40px;
+  -webkit-transition: -webkit-transform .5s;
+  -moz-transition: -webkit-transform .5s;
+  -ms-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s; }
+  .icons-resume.resume-info-down.icons-resume-rotate {
+    -webkit-transform: rotated3d(0,0,1,180deg);
+    -ms-transform: rotated3d(0,0,1,180deg);
+    -moz-transform: rotated3d(0,0,1,180deg);
+    transform: rotated3d(0,0,1,180deg); }
 
 .icons-resume.resume-info-notice {
   background-position: -40px -20px; }

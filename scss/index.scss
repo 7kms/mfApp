@@ -2,10 +2,31 @@
 $bodyBg: #e5ebeb;
 $titleColor: #02c9ac;
 $textareaBg: #e5ebeb;
+$timelineColor: #5cddca;
 $borderColor: #dee2e1;
 $textColor: #535353;
+$descColor: #9d9d9d;
 $textSize: 16px;
 $placeholder: #c2c2c2;
+@mixin transition($property,$during){
+  @if $property == transform{
+    -webkit-transition: $property $during;
+    -moz-transition: $property $during;
+    -ms-transition: $property $during;
+    transition: $property $during;
+  }@else{
+    -webkit-transition: $property $during;
+    -moz-transition: $property $during;
+    -ms-transition: $property $during;
+    transition: $property $during;
+  }
+}
+@mixin transform($property){
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  -moz-transform: $property;
+  transform: $property;
+}
 .resume-content{
   background-color: $bodyBg;
   .resume-score{
@@ -51,8 +72,19 @@ $placeholder: #c2c2c2;
     &.resume-text{
       color: $textColor;
       font-size: $textSize;
-      .res-basic-lable:not(:last-child){
-        margin-right: 10%;
+      .res-exp-info-content{
+        position: relative;
+        &::before{
+          content: "";
+          position: absolute;
+          top: 24px;
+          left: 22px;
+          bottom: 14px;
+          border-left: 1px dashed $timelineColor;
+        }
+      }
+      .res-basic-lable{
+        min-width: 70px;
       }
       .resume-photo{
         width: 60px;
@@ -68,9 +100,36 @@ $placeholder: #c2c2c2;
         text-align: center;
         color: $placeholder;
       }
+      .resume-exp-info{
+        .resume-exp-item{
+          min-height: 30px;
+          line-height: 30px;
+          margin:0 4%;
+          &.no-icon{
+            padding-left: 24px;
+          }
+          &.res-exp-desc{
+            color: $descColor;
+          }
+          .resume-info-sub-add{
+            margin-left: 2px;
+          }
+          .exp-btn-add{
+            padding: 0;
+          }
+          .exp-item-btn{
+            float: right;
+            height: 30px;
+            line-height: 30px;
+          }
+        }
+      }
     }
     .exp-content-more{
       margin-top: -20px;
+      width: 80px;
+      left: 50%;
+      margin-left: -40px;
     }
   }
   .resume-cut-line{
@@ -86,7 +145,7 @@ $placeholder: #c2c2c2;
       span{
         display: inline-block;
         padding: 0 10px;
-        background-color: #fff;
+        background-color: $bodyBg;
       }
     }
   }
@@ -122,6 +181,10 @@ $placeholder: #c2c2c2;
 }
 .icons-resume.resume-info-down{
   background-position: -40px -40px;
+  @include transition(#{"-webkit-transform"},#{".5s"});
+  &.icons-resume-rotate{
+    @include  transform(#{"rotated3d(0,0,1,180deg)"});
+  }
 }
 .icons-resume.resume-info-notice{
   background-position: -40px -20px;

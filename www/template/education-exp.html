@@ -1,7 +1,7 @@
 <ion-view view-title="教育经历">
   <ion-content class="resume-content">
     <div class="card education-list resume-info-list">
-      <form autocomplete="off">
+      <form autocomplete="off" name="resEduForm">
         <ion-input class="item item-input">
           <ion-label>学校名称</ion-label>
           <input type="text" placeholder="必填" required ng-model="eduData.schoolName">
@@ -22,13 +22,13 @@
           <ion-label>毕业时间</ion-label>
           <input type="text" placeholder="必选" required ng-model="eduData.end">
         </ion-input>
-        <ion-iput class="item item-input item-stacked-label">
+        <ion-input class="item item-input item-stacked-label">
           <ion-label>在校经历</ion-label>
           <textarea class="school-desc resume-info-text-desc" placeholder="描述您的在校经历和所获得的个人成绩400字以内" maxlength="400" required ng-model="eduData.status"></textarea>
-        </ion-iput>
+        </ion-input>
         <div class="padding row">
           <div class="col col-80 col-offset-10">
-            <button type="submit" class="button button-block button-balanced" ng-click="updateEdu()">保存</button>
+            <button type="submit" class="button button-block button-balanced" ng-disabled="!resEduForm.$valid" ng-click="updateEdu()">保存</button>
             <p class="delete-notice" ng-show="deleteInfo" ng-click="deleteInfo()"><span class="balanced">删除此条教育经历</span></p>
           </div>
         </div>

@@ -1,6 +1,27 @@
 mfApp
+  .filter("limitDesc",function(){
+    return function(input,limitLength){
+        var limit = limitLength || 25;
+        var str;
+        if(limit < input.length){
+          str = input.slice(0,limit) + "...";
+        }else{
+          str = input;
+        }
+        return str;
+    }
+  })
   .controller("resumeControl",["$scope","$state","resumeObj",function($scope,$state,resumeObj){
     $scope.resumeData = resumeObj.resumeData;
+    $scope.resumeViewObj = {
+      career:[],
+      projects:[],
+      education:[]
+    };
+    $scope.limitCount = 25;
+    $scope.changeDescView = function(item,index){
+      this.resumeViewObj[item][index] = !this.resumeViewObj[item][index];
+    };
     $scope.handleInfo = {
       education : function(eduIndex){
         $state.go("education",{index: eduIndex});
