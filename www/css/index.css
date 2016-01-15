@@ -41,7 +41,7 @@
           content: "";
           position: absolute;
           top: 24px;
-          left: 22px;
+          left: 24px;
           bottom: 14px;
           border-left: 1px dashed #5cddca; }
       .resume-content .card.resume-text .res-basic-lable {
@@ -124,15 +124,15 @@
 
 .icons-resume.resume-info-down {
   background-position: -40px -40px;
-  -webkit-transition: -webkit-transform .5s;
-  -moz-transition: -webkit-transform .5s;
-  -ms-transition: -webkit-transform .5s;
-  transition: -webkit-transform .5s; }
+  -webkit-transition: -webkit-transform 0.2s;
+  -moz-transition: -moz-transform 0.2s;
+  -ms-transition: -ms-transform 0.2s;
+  transition: transform 0.2s; }
   .icons-resume.resume-info-down.icons-resume-rotate {
-    -webkit-transform: rotated3d(0,0,1,180deg);
-    -ms-transform: rotated3d(0,0,1,180deg);
-    -moz-transform: rotated3d(0,0,1,180deg);
-    transform: rotated3d(0,0,1,180deg); }
+    -webkit-transform: rotate3d(0,0,1,180deg);
+    -ms-transform: rotate3d(0,0,1,180deg);
+    -moz-transform: rotate3d(0,0,1,180deg);
+    transform: rotate3d(0,0,1,180deg); }
 
 .icons-resume.resume-info-notice {
   background-position: -40px -20px; }

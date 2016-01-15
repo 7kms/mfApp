@@ -10,10 +10,10 @@ $textSize: 16px;
 $placeholder: #c2c2c2;
 @mixin transition($property,$during){
   @if $property == transform{
-    -webkit-transition: $property $during;
-    -moz-transition: $property $during;
-    -ms-transition: $property $during;
-    transition: $property $during;
+    -webkit-transition: -webkit-transform $during;
+    -moz-transition: -moz-transform $during;
+    -ms-transition: -ms-transform $during;
+    transition: transform $during;
   }@else{
     -webkit-transition: $property $during;
     -moz-transition: $property $during;
@@ -78,7 +78,7 @@ $placeholder: #c2c2c2;
           content: "";
           position: absolute;
           top: 24px;
-          left: 22px;
+          left: 24px;
           bottom: 14px;
           border-left: 1px dashed $timelineColor;
         }
@@ -181,9 +181,9 @@ $placeholder: #c2c2c2;
 }
 .icons-resume.resume-info-down{
   background-position: -40px -40px;
-  @include transition(#{"-webkit-transform"},#{".5s"});
+  @include transition(transform,.2s);
   &.icons-resume-rotate{
-    @include  transform(#{"rotated3d(0,0,1,180deg)"});
+    @include  transform(#{"rotate3d(0,0,1,180deg)"});
   }
 }
 .icons-resume.resume-info-notice{
