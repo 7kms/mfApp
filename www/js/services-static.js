@@ -8,18 +8,19 @@ mfApp
         "dob": "1990年09月",
         "gender": "男",
         "avatarUrl": "img/photo.png",
+        "mobile": "13756561516",
         "id": 120,
         "career": [
           {
             "start": "2015年10月",
-            "jobDescription": "各种测试",
+            "jobDescription": "各1种dadadad测试各种dad各1种dadadad测试各种dad各1种dadadad测试各种dad各1种dadadad测试各种dad各1种dadadad测试各种dad",
             "end": "至今",
             "companyName": "ibm",
             "jobName": "测试工程师"
           },
           {
             "start": "2015年10月",
-            "jobDescription": "各种dadadad测试",
+            "jobDescription": "各1种dadadad测试各种dadadad测试各种dadadad测试各种dadadad测试各种dadadad测试",
             "end": "至今",
             "companyName": "ibm",
             "jobName": "测试工dadad程师"
