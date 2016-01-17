@@ -1,7 +1,6 @@
 "use strict";
 var app = angular.module('ionic-citypicker', ['ionic']);
-app.directive('ionicCityPicker', ['$ionicPopup', '$timeout','CityPickerService','currentCityService','$ionicScrollDelegate','$ionicModal', function ($ionicPopup, $timeout,CityPickerService,currentCityService,$ionicScrollDelegate,$ionicModal) {
-  console.log(currentCityService);
+app.directive('ionicCityPicker', ['$ionicPopup', '$timeout','CityPickerService','$ionicScrollDelegate','$ionicModal', function ($ionicPopup, $timeout,CityPickerService,$ionicScrollDelegate,$ionicModal) {
   return {
     restrict: 'AE',
     template:  '<input type="text"  placeholder={{vm.placeholder}} ng-model="citydata" class={{vm.cssClass}} readonly>',
@@ -12,7 +11,6 @@ app.directive('ionicCityPicker', ['$ionicPopup', '$timeout','CityPickerService',
       buttonClicked: '&'
     },
     link: function (scope, element, attrs) {
-        console.log(currentCityService);
         var vm=scope.vm={},citypickerModel=null;
        // currentCityService.currentCity = scope.citydata;
         //根据城市数据来 设置Handle。
@@ -63,8 +61,6 @@ app.directive('ionicCityPicker', ['$ionicPopup', '$timeout','CityPickerService',
               //country &&  (vm.country=vm.city.sub[index]);//处理乡数据
               HandleChild && $ionicScrollDelegate.$getByHandle(HandleChild).scrollTop();//初始化子scroll top位
               //数据同步
-              currentCityService.currentCity = scope.citydata = vm.province.name + vm.tag +  vm.city.name;
-              console.log(currentCityService.currentCity)
                 //(vm.city.sub && vm.city.sub.length>0) ? (scope.citydata=vm.province.name +vm.tag+  vm.city.name+vm.tag+vm.country.name ) :(scope.citydata=vm.province.name +vm.tag+  vm.city.name)
             },150)
           }else{
@@ -84,7 +80,7 @@ app.directive('ionicCityPicker', ['$ionicPopup', '$timeout','CityPickerService',
               return
             }
             attrs.checked=true;
-            $ionicModal.fromTemplateUrl('../lib/ionic-citypicker/src/city-picker-modal.html', {
+            $ionicModal.fromTemplateUrl('lib/ionic-citypicker/src/city-picker-modal.html', {
               scope: scope,
               animation: 'slide-in-up',
               backdropClickToClose:vm.backdropClickToClose

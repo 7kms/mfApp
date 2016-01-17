@@ -32,6 +32,22 @@
         text-decoration: none; }
     .resume-content .card .resume-contact {
       border-top: 1px dashed #dee2e1; }
+    .resume-content .card.basic-info-list .item:nth-child(2) {
+      border: none; }
+    .resume-content .card.basic-info-list .item-input .icon {
+      position: absolute;
+      right: 10px;
+      top: 13px;
+      font-size: 20px; }
+    .resume-content .card.basic-info-list .item-gender .gender-switch {
+      position: absolute;
+      right: 30px;
+      top: 7px;
+      height: 34px;
+      line-height: 34px; }
+      .resume-content .card.basic-info-list .item-gender .gender-switch > span {
+        padding: 0 3px;
+        display: inline-block; }
     .resume-content .card.resume-text {
       color: #535353;
       font-size: 16px; }

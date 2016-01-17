@@ -69,6 +69,32 @@ $placeholder: #c2c2c2;
     .resume-contact{
       border-top: 1px dashed $borderColor;
     }
+    &.basic-info-list{
+      .item:nth-child(2){
+        border: none;
+      }
+      .item-input{
+        .icon{
+          position: absolute;
+          right: 10px;
+          top: 13px;
+          font-size: 20px;
+        }
+      }
+      .item-gender{
+        .gender-switch{
+          & > span{
+            padding: 0 3px;
+            display: inline-block;
+          }
+          position: absolute;
+          right: 30px;
+          top: 7px;
+          height: 34px;
+          line-height: 34px;
+        }
+      }
+    }
     &.resume-text{
       color: $textColor;
       font-size: $textSize;
@@ -189,7 +215,6 @@ $placeholder: #c2c2c2;
 .icons-resume.resume-info-notice{
   background-position: -40px -20px;
 }
-
 .resume-info-list{
   padding: 0 2%;
   &.language-list{

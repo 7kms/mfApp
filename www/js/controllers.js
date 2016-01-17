@@ -49,13 +49,33 @@ mfApp
       }
     };
   }])
-  .controller("basicControl",["$scope","$state","$ionicHistory","resumeObj",function($scope,$state,$ionicHistory,resumeObj){
+  .controller("basicControl",["$scope","$state","$ionicHistory","$ionicModal","resumeObj",function($scope,$state,$ionicHistory,$ionicModal,resumeObj){
     $scope.basicData = resumeObj.resumeData;
+    $scope.switchGender = function(gender){
+      this.basicData.gender = gender;
+    };
     $scope.updateBasic = function(){
       resumeObj.updateInfo();
       console.log("修改成功");
       $ionicHistory.goBack();
-    }
+    };
+    $scope.workExpArr = ["在读学生", "应届毕业生", "1年以下", "1-3年", "3-5年", "5-10年", "10年以上"];
+    $ionicModal.fromTemplateUrl('my-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+    $scope.openModal = function() {
+      $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
+    //Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+      $scope.modal.remove();
+    });
   }])
   .controller("eduControl",["$scope","$state","$ionicHistory","resumeObj",function($scope,$state,$ionicHistory,resumeObj){
     var index = parseInt($state.params.index);

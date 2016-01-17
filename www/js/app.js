@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var mfApp = angular.module('resumeModule', ['ionic']);
+var mfApp = angular.module('resumeModule', ['ionic','ionic-citydata','ionic-citypicker']);
 mfApp.config(["$stateProvider","$urlRouterProvider",function($stateProvider,$urlRouterProvider){
       $stateProvider
       .state("index",{
@@ -13,7 +13,7 @@ mfApp.config(["$stateProvider","$urlRouterProvider",function($stateProvider,$url
       })
       .state("basic",{
         url:"/resume-basic",
-        templateUrl:"template/resume-basic-2.html",
+        templateUrl:"template/resume-basic.html",
         controller: "basicControl"
       })
       .state("education",{

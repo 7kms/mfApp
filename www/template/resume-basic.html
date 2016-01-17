@@ -1,69 +1,65 @@
 <ion-view view-title="基本信息">
   <ion-content class="resume-content">
-    <div class="main-content">
-      <div class="list card resume-info">
-        <div class="item item-image header-pic-content">
-          <img ng-src="{{basicData.avatarUrl}}" width="162" height="162" alt="photo">
-          <div class="text-content">我的头像</div>
+    <div class="card basic-info-list resume-info-list">
+      <form name="resBasicForm" autocomplete="off">
+        <div class="item item-image resume-photo">
+          <img ng-src="{{ basicData.avatarUrl }}" width="80" height="80">
+          <p>我的头像</p>
         </div>
-        <div class="item row">
-          <div class="col-40"><span>姓名</span></div>
-          <div class="col-50 col-offset-10 balanced">
-            <input type="text" class="balanced" ng-model="basicData.name" placeholder="必填">
+        <div class="item item-input">
+          <ion-label>姓名</ion-label>
+          <input type="text" ng-model="basicData.name" placeholder="必填" required>
+        </div>
+        <div class="item item-input item-gender">
+          <ion-label>性别</ion-label>
+          <div class="gender-switch">
+            <span class="icon-left ion-android-radio-button-off" ng-class="{balanced: basicData.gender=='男'}" ng-click="switchGender('男')">男</span>
+            <span class="icon-left ion-android-radio-button-off" ng-class="{balanced: basicData.gender=='女'}" ng-click="switchGender('女')">女</span>
           </div>
         </div>
-        <div class="item row">
-          <div class="col-40">性别</div>
-          <div class="col-50 col-offset-10">
-            <span class="icon-left ion-android-radio-button-off"> 男</span>&nbsp;
-            <span class="icon-left ion-android-radio-button-off balanced"> 女</span>
-          </div>
+        <div class="item item-input">
+          <ion-label>出生年月</ion-label>
+          <input type="text" ng-model="basicData.dob" placeholder="必选" required>
+          <i class="icon ion-ios-arrow-right balanced" ng-show="!basicData.dob"></i>
         </div>
-        <div class="item row">
-          <div class="col-40">出生年月</div>
-          <div class="col-50 col-offset-10 item-icon-right">
-            <input type="text" placeholder="请选择" ng-model="basicData.dob">
-          </div>
+        <div class="item item-input">
+          <ion-label>工作年限</ion-label>
+          <input type="text" ng-model="basicData.workingExp" ng-click="openModal()" placeholder="必选" required readonly>
+          <i class="icon ion-ios-arrow-right balanced" ng-show="!basicData.workingExp"></i>
         </div>
-        <div class="item row item-select item-input">
-          <div class="col-40">工作年限</div>
-          <div class="col-50 col-offset-10 item-icon-right">
-            <select>
-              <option>在读学生</option>
-              <option>应届毕业生</option>
-              <option>1年以下</option>
-              <option>1-3年</option>
-              <option>3-5年</option>
-              <option>5-10年</option>
-              <option>10年以上</option>
-            </select>
-          </div>
+        <div class="item item-input">
+          <ion-label>所在城市</ion-label>
+          <input type="text" ng-model="basicData.location" placeholder="必选" required>
+          <i class="icon ion-ios-arrow-right balanced" ng-show="!basicData.location"></i>
         </div>
-        <div class="item row">
-          <div class="col-40">所在城市</div>
-          <div class="col-50 col-offset-10 item-icon-right">
-            <!--<ionic-city-picker placeholder="必选" tag="-" backdrop=true backdrop-click-to-close=false  bar-css-class="bar-balanced" ok-text="确定" citydata="citydata"  button-clicked="vm.cb()"></ionic-city-picker>-->
-          </div>
+        <div class="item item-input">
+          <ion-label>电子邮箱</ion-label>
+          <input type="text" ng-model="basicData.email" placeholder="必填" required>
         </div>
-        <div class="item row">
-          <div class="col-40">电子邮箱</div>
-          <div class="col-50 col-offset-10">
-            <input type="email" placeholder="必填" ng-model="basicData.email">
-          </div>
+        <div class="item item-input">
+          <ion-label>电话号码</ion-label>
+          <input type="tel" ng-model="basicData.tel" placeholder="必填" required>
         </div>
-        <div class="item row">
-          <div class="col-40">手机号码</div>
-          <div class="col-50 col-offset-10">
-            <input type="tel" placeholder="必填" ng-model="basicData.tel">
-          </div>
-        </div>
-        <div class="item row">
+        <div class="padding row">
           <div class="col col-80 col-offset-10">
-            <button class="button button-block button-balanced" ng-click="updateBasic()">保存</button>
+            <button class="button button-block button-balanced" ng-disabled="!resBasicForm.$valid" ng-click="updateBasic()">保存</button>
           </div>
         </div>
-      </div>
+      </form>
+      <ionic-city-picker placeholder="出发城市" tag="-" backdrop=true backdrop-click-to-close=false css-class="xxx" ok-text="确定" citydata="citydata"  button-clicked="vm.cb()" ></ionic-city-picker>
     </div>
   </ion-content>
 </ion-view>
-
+<script id="my-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar-balanced">
+      <h3 class="title">请选择工作年限</h3>
+      <button class="button button-balanced" ng-disabled="!basicData.workingExp" ng-click="closeModal()">确认</button>
+    </ion-header-bar>
+    <ion-content scroll="true">
+      <ion-list>
+        <ion-radio ng-model="basicData.workingExp" ng-repeat="exp in workExpArr" icon="icon ion-ios-checkmark balanced" ng-value="exp">{{exp}}</ion-radio>
+      </ion-list>
+    </ion-content>
+  </ion-modal-view>
+</script>

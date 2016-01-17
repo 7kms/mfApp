@@ -13,7 +13,7 @@ mfApp.config(["$stateProvider","$urlRouterProvider",function($stateProvider,$url
       })
       .state("basic",{
         url:"/resume-basic",
-        templateUrl:"resume-basic-2.html",
+        templateUrl:"resume-basic.html",
         controller: "basicControl"
       })
       .state("education",{
