@@ -12,7 +12,6 @@ app.directive('ionicCityPicker', ['$ionicPopup', '$timeout','CityPickerService',
     },
     link: function (scope, element, attrs) {
         var vm=scope.vm={},citypickerModel=null;
-       // currentCityService.currentCity = scope.citydata;
         //根据城市数据来 设置Handle。
         vm.provinceHandle="provinceHandle"+attrs.citydata;
         vm.cityHandle="cityHandle"+attrs.citydata;
