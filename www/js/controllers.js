@@ -60,6 +60,19 @@ mfApp
       $ionicHistory.goBack();
     };
     $scope.workExpArr = ["在读学生", "应届毕业生", "1年以下", "1-3年", "3-5年", "5-10年", "10年以上"];
+    $ionicModal.fromTemplateUrl('my-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+    $scope.openModal = function() {
+      $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
+
   }])
   .controller("eduControl",["$scope","$state","$ionicHistory","resumeObj",function($scope,$state,$ionicHistory,resumeObj){
     var index = parseInt($state.params.index);
