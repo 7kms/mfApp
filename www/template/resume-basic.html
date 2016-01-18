@@ -24,7 +24,8 @@
         </div>
         <div class="item item-input">
           <ion-label>工作年限</ion-label>
-          <input type="text" ng-model="basicData.workingExp" ng-click="openModal()" placeholder="必选" required readonly>
+          <!--<input type="text" ng-model="basicData.workingExp" ng-click="openModal()" placeholder="必选" required readonly>-->
+          <ionic-single-select control-title="请选择工作年限" placeholder="请选择" control-handle="workExpHandle" control-model-data="basicData.workingExp" control-init-data="{{basicData.workingExp || '1-3年'}}" control-data-source="workExpArr"></ionic-single-select>
           <i class="icon ion-ios-arrow-right balanced" ng-show="!basicData.workingExp"></i>
         </div>
         <div class="item item-input">
@@ -46,28 +47,6 @@
           </div>
         </div>
       </form>
-      <ionic-city-picker placeholder="出发城市" tag="-" backdrop=true backdrop-click-to-close=false css-class="xxx" ok-text="确定" citydata="citydata"  button-clicked="vm.cb()" ></ionic-city-picker>
     </div>
   </ion-content>
 </ion-view>
-<script id="my-modal.html" type="text/ng-template">
-  <div class="emulate-select-control">
-    <ion-modal-view>
-      <div class="emulate-select-bg"></div>
-      <div class="emulate-select-content">
-        <ion-header-bar class="bar-balanced">
-          <h3 class="title">请选择工作年限</h3>
-          <button class="button button-balanced" ng-click="selectOk()">确认</button>
-        </ion-header-bar>
-        <div class="emulate-select-inner has-header">
-          <ion-scroll class="e-s-scroll-box" delegate-handle="workExpHandle" on-scroll="selectObj.getData()">
-            <ul class="e-select-list text-center">
-              <li class="e-select-item" ng-repeat="work in workExpArr">{{work}}</li>
-            </ul>
-          </ion-scroll>
-          <div class="select-picker-center-highlight"></div>
-        </div>
-      </div>
-    </ion-modal-view>
-  </div>
-</script>

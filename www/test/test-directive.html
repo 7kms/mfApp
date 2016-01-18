@@ -41,7 +41,12 @@
 					restrict: 'EA',
 					scope: {},
 					template: '<div><input type="text" ng-model="aaa"></div>',
-					replace: true
+					replace: true,
+          link: function(scope,element,attr){
+            element.on("click",function(){
+              alert("111");
+            })
+          }
 				}
 			});
 	</script>
