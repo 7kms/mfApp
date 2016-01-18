@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>test-directive</title>
+</head>
+<body ng-app="myApp">
+		<section ng-controller="testControl" ng-init="aaa='box'">
+			<div>
+				<input type="text" ng-model="data">
+				<input type="text" ng-model="aaa">
+			</div>
+			<div>
+				<hello></hello>
+			</div>
+			<div ng-controller="parentControl" >
+					<input type="text" ng-model="aaa">
+					<hello></hello>
+				<div ng-controller="childControl">
+					<input type="text" ng-model="aaa">
+					<hello></hello>
+				</div>
+			</div>
+		</section>
+	<script src="../lib/ionic/js/angular/angular.min.js"></script>
+	<script>
+			var app = angular.module("myApp",[]);
+			app.controller("testControl",["$scope",function($scope){
+				$scope.data = "sasas";
+				$scope.aaa = "content box";
+			}])
+			.controller("parentControl",["$scope",function($scope){
+				$scope.aaa = "parent box";
+			}])
+			.controller("childControl",["$scope",function($scope){
+				$scope.aaa = "child box";
+			}])
+			app.directive("hello",function(){
+				return {
+					restrict: 'EA',
+					scope: {},
+					template: '<div><input type="text" ng-model="aaa"></div>',
+					replace: true
+				}
+			});
+	</script>
+</body>
+</html>
