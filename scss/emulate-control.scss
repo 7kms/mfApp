@@ -1,0 +1,72 @@
+@charset "UTF-8";
+$selectItemHeight: 36px;
+$controlHeight: $selectItemHeight * 5;
+@mixin select-background{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.3);
+}
+/*emulate select-control*/
+.emulate-select-control{
+  @include select-background;
+  .modal{
+    background: none;
+  }
+  .emulate-select-bg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .emulate-select-content{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: $controlHeight + 44;
+    .emulate-select-inner{
+      position: absolute;
+      width: 100%;
+      background: #ccc;
+      //background:linear-gradient(to top, transparent, transparent 5%, white 20%, white 80%, transparent 95%, transparent);
+      .e-s-scroll-box{
+        height: $controlHeight;
+        overflow: hidden;
+      }
+      .e-select-list{
+        padding: 2*$selectItemHeight 0;
+      }
+      .e-select-item{
+        height: $selectItemHeight;
+        line-height: $selectItemHeight;
+      }
+      .select-picker-center-highlight{
+        position: absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        &::after,&::before{
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 50%;
+          background-color: rgba(255,255,255,.6);
+        }
+        &::after{
+          bottom: 0;
+          margin-bottom: -$selectItemHeight/2;
+        }
+        &::before{
+          top: 0;
+          margin-top: -$selectItemHeight/2;
+        }
+      }
+    }
+  }
+}
+
+

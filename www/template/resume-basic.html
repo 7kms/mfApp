@@ -34,7 +34,7 @@
         </div>
         <div class="item item-input">
           <ion-label>电子邮箱</ion-label>
-          <input type="text" ng-model="basicData.email" placeholder="必填" required>
+          <input type="email" ng-model="basicData.email" placeholder="必填" required>
         </div>
         <div class="item item-input">
           <ion-label>电话号码</ion-label>
@@ -51,15 +51,23 @@
   </ion-content>
 </ion-view>
 <script id="my-modal.html" type="text/ng-template">
-  <ion-modal-view>
-    <ion-header-bar class="bar-balanced">
-      <h3 class="title">请选择工作年限</h3>
-      <button class="button button-balanced" ng-disabled="!basicData.workingExp" ng-click="closeModal()">确认</button>
-    </ion-header-bar>
-    <ion-content scroll="true">
-      <ion-list>
-        <ion-radio ng-model="basicData.workingExp" ng-repeat="exp in workExpArr" icon="icon ion-ios-checkmark balanced" ng-value="exp">{{exp}}</ion-radio>
-      </ion-list>
-    </ion-content>
-  </ion-modal-view>
+  <div class="emulate-select-control">
+    <ion-modal-view>
+      <div class="emulate-select-bg"></div>
+      <div class="emulate-select-content">
+        <ion-header-bar class="bar-balanced">
+          <h3 class="title">请选择工作年限</h3>
+          <button class="button button-balanced" ng-click="selectOk()">确认</button>
+        </ion-header-bar>
+        <div class="emulate-select-inner has-header">
+          <ion-scroll class="e-s-scroll-box" delegate-handle="workExpHandle" on-scroll="selectObj.getData()">
+            <ul class="e-select-list text-center">
+              <li class="e-select-item" ng-repeat="work in workExpArr">{{work}}</li>
+            </ul>
+          </ion-scroll>
+          <div class="select-picker-center-highlight"></div>
+        </div>
+      </div>
+    </ion-modal-view>
+  </div>
 </script>

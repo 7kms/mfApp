@@ -49,7 +49,7 @@ mfApp
       }
     };
   }])
-  .controller("basicControl",["$scope","$state","$ionicHistory","$ionicModal","resumeObj",function($scope,$state,$ionicHistory,$ionicModal,resumeObj){
+  .controller("basicControl",["$scope","$timeout","$ionicHistory","$ionicModal","$ionicScrollDelegate","resumeObj",function($scope,$timeout,$ionicHistory,$ionicModal,$ionicScrollDelegate,resumeObj){
     $scope.basicData = resumeObj.resumeData;
     $scope.switchGender = function(gender){
       this.basicData.gender = gender;
@@ -60,6 +60,36 @@ mfApp
       $ionicHistory.goBack();
     };
     $scope.workExpArr = ["在读学生", "应届毕业生", "1年以下", "1-3年", "3-5年", "5-10年", "10年以上"];
+    var selectObj = $scope.selectObj = {hasInit:false};
+    selectObj.init = function(item,itemList){
+      var handle = $ionicScrollDelegate.$getByHandle("workExpHandle");
+      var index;
+      for(var i= 0,len=itemList.length; i<len; i++){
+        if(itemList[i] === item){
+          index = i;
+          break;
+        }
+      }
+      if(index === undefined){
+        index = 0;
+      }
+      handle.scrollTo(0,index*36);
+      this.hasInit = true;
+    };
+    selectObj.getData = function(){
+      var handle = $ionicScrollDelegate.$getByHandle("workExpHandle");
+      var scrollTop = handle.getScrollPosition().top;
+      var itemIndex = Math.round(scrollTop/36);
+      var len = $scope.workExpArr.length;
+      $timeout.cancel(selectObj.scrolling);
+      itemIndex = (itemIndex < 0) ? 0 : ((itemIndex > len - 1) ? (len - 1) : itemIndex);
+      if(itemIndex*36 === scrollTop){
+        selectObj.index = itemIndex;
+      }
+      selectObj.scrolling = $timeout(function(){
+        handle.scrollTo(0,itemIndex*36,true);
+      },100);
+    };
     $ionicModal.fromTemplateUrl('my-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -67,9 +97,13 @@ mfApp
       $scope.modal = modal;
     });
     $scope.openModal = function() {
+      if(!selectObj.hasInit){
+        selectObj.init($scope.basicData.workingExp,$scope.workExpArr);
+      }
       $scope.modal.show();
     };
-    $scope.closeModal = function() {
+    $scope.selectOk = function() {
+      $scope.basicData.workingExp = $scope.workExpArr[selectObj.index];
       $scope.modal.hide();
     };
     //Cleanup the modal when we're done with it!
