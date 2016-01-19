@@ -12,7 +12,8 @@
         </ion-input>
         <ion-input class="item item-input">
           <ion-label>期望地点</ion-label>
-          <input type="text" placeholder="必选" required ng-model="positionExpData.targetWorkLocation">
+          <!--<input type="text" placeholder="必选" required ng-model="positionExpData.targetWorkLocation">-->
+          <ionic-multiple-select control-title="期望地点" placeholder="请选择" control-handle="targetWorkHandle" control-model-data="positionExpData.targetWorkLocation" control-init-data="{{positionExpData.targetWorkLocation || '北京-朝阳'}}" control-data-source="citySourceObj"></ionic-multiple-select>
         </ion-input>
         <ion-input class="item item-input">
           <ion-label>期望月薪</ion-label>

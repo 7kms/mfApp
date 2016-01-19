@@ -16,11 +16,13 @@
         </ion-input>
         <ion-input class="item item-input">
           <ion-label>入学时间</ion-label>
-          <input type="text" placeholder="必选" required ng-model="eduData.start">
+          <!--<input type="text" placeholder="必选" required ng-model="eduData.start">-->
+          <ionic-multiple-select control-title="请选择入学时间" placeholder="请选择" control-tag="年" control-handle="studyStartHandle" control-model-data="eduData.start" control-init-data="{{eduData.start}}" control-data-source="datePickObj"></ionic-multiple-select>
         </ion-input>
         <ion-input class="item item-input">
           <ion-label>毕业时间</ion-label>
-          <input type="text" placeholder="必选" required ng-model="eduData.end">
+          <!--<input type="text" placeholder="必选" required ng-model="eduData.end">-->
+          <ionic-multiple-select control-title="请选择毕业时间" placeholder="请选择" control-tag="年" control-handle="studyEndHandle" control-model-data="eduData.end" control-init-data="{{eduData.end}}" control-data-source="datePickObj"></ionic-multiple-select>
         </ion-input>
         <ion-input class="item item-input item-stacked-label">
           <ion-label>在校经历</ion-label>

@@ -12,11 +12,13 @@
         </ion-input>
         <ion-input class="item item-input">
           <ion-label>入职时间</ion-label>
-          <input type="text" placeholder="必选" required ng-model="workData.start">
+          <ionic-multiple-select control-title="请选择入职时间" placeholder="请选择" control-tag="年" control-handle="workStartHandle" control-model-data="workData.start" control-init-data="{{workData.start}}" control-data-source="datePickObj"></ionic-multiple-select>
+          <!--<input type="text" placeholder="必选" required ng-model="workData.start">-->
         </ion-input>
         <ion-input class="item item-input">
           <ion-label>结束时间</ion-label>
-          <input type="text" placeholder="必选" required ng-model="workData.end">
+          <ionic-multiple-select control-title="请选择结束时间" placeholder="必选" control-tag="年" control-handle="workEndHandle" control-model-data="workData.end" control-init-data="{{workData.end}}" control-data-source="datePickObj"></ionic-multiple-select>
+          <!--<input type="text" placeholder="必选" required ng-model="workData.end">-->
         </ion-input>
         <ion-input class="item item-input item-stacked-label">
           <ion-label>在职经历</ion-label>

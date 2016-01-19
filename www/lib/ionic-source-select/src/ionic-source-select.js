@@ -122,12 +122,14 @@
       return {
         restrict:"E",
         template:"<input type='text' ng-model='selectObj.modelData' readonly>",
-        scope:false,
+        scope:true,
         replace:true,
         link:function(scope,element,attrs){
           var selectObj = scope.selectObj = {},controlModel=null;
+          var sourceName = attrs.controlDataSource;
+          var dataSource = scope[sourceName];
           var handle = attrs.controlHandle || "selectHandle";
-          var dataObj = {
+          var dataObj = dataSource || {
             "北京":["东城","西城","崇文","宣武","朝阳","丰台","石景山","海淀","门头沟","房山","通州","顺义","昌平","大兴","平谷","怀柔","密云","延庆"],
             "上海":["黄浦","卢湾","徐汇","长宁","静安","普陀","闸北","虹口","杨浦","闵行","宝山","嘉定","浦东","金山","松江","青浦","南汇","奉贤","崇明"],
             "天津":["和平","东丽","河东","西青","河西","津南","南开","北辰","河北","武清","红挢","塘沽","汉沽","大港","宁河","静海","宝坻","蓟县"],
@@ -166,6 +168,7 @@
           var parentSourceArr = [];
           var initData = attrs.controlInitData;
           var tag = attrs.controlTag || "-";
+          //var reg = /(\d{4})\D*(\d{1,2})/;
           for(var i in dataObj){
             parentSourceArr.push(i);
           }
@@ -175,7 +178,7 @@
           selectObj.placeholder = attrs.placeholder || "请选择";
           selectObj.parentSource = parentSourceArr;
           selectObj.initParent = initData.split(tag)[0] || parentSourceArr[0];
-          selectObj.initChild = initData.split(tag)[1] || dataObj[selectObj.initParent][0];
+          selectObj.initChild = initData.split(tag)[1] || (dataObj[selectObj.initParent] ? dataObj[selectObj.initParent][0] : dataObj[parentSourceArr[0]][0]);
           selectObj.childSource = dataObj[selectObj.initParent];
           selectObj.modelData = initData;
           selectObj.selectOk = function(){

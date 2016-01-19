@@ -49,7 +49,7 @@ mfApp
       }
     };
   }])
-  .controller("basicControl",["$scope","$timeout","$ionicHistory","$ionicModal","$ionicScrollDelegate","resumeObj",function($scope,$timeout,$ionicHistory,$ionicModal,$ionicScrollDelegate,resumeObj){
+  .controller("basicControl",["$scope","$timeout","$ionicHistory","$ionicModal","$ionicScrollDelegate","resumeObj","cityLinkObj","datePickObj",function($scope,$timeout,$ionicHistory,$ionicModal,$ionicScrollDelegate,resumeObj,cityLinkObj,datePickObj){
     $scope.basicData = resumeObj.resumeData;
     $scope.switchGender = function(gender){
       this.basicData.gender = gender;
@@ -60,21 +60,10 @@ mfApp
       $ionicHistory.goBack();
     };
     $scope.workExpArr = ["在读学生", "应届毕业生", "1年以下", "1-3年", "3-5年", "5-10年", "10年以上"];
-    $ionicModal.fromTemplateUrl('my-modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-    $scope.openModal = function() {
-      $scope.modal.show();
-    };
-    $scope.closeModal = function() {
-      $scope.modal.hide();
-    };
-
+    $scope.citySourceObj = cityLinkObj;
+    $scope.datePickObj = datePickObj;
   }])
-  .controller("eduControl",["$scope","$state","$ionicHistory","resumeObj",function($scope,$state,$ionicHistory,resumeObj){
+  .controller("eduControl",["$scope","$state","$ionicHistory","resumeObj","datePickObj",function($scope,$state,$ionicHistory,resumeObj,datePickObj){
     var index = parseInt($state.params.index);
     $scope.eduData = resumeObj.resumeData.education[index];
     if(!$scope.eduData){
@@ -95,17 +84,19 @@ mfApp
         resumeObj.resumeData.education.splice(index,1);
         console.log("删除成功");
         $ionicHistory.goBack();
-      }
+      };
+      $scope.datePickObj = datePickObj;
     }
   }])
-  .controller("positionExpControl",["$scope","$state","$ionicHistory","resumeObj",function($scope,$state,$ionicHistory,resumeObj){
+  .controller("positionExpControl",["$scope","$state","$ionicHistory","resumeObj","cityLinkObj",function($scope,$state,$ionicHistory,resumeObj,cityLinkObj){
     $scope.positionExpData = resumeObj.resumeData;
     $scope.updatePositionExp = function(){
       resumeObj.updateInfo();
       $ionicHistory.goBack();
-    }
+    };
+    $scope.citySourceObj = cityLinkObj;
   }])
-  .controller("workControl",["$scope","$state","$ionicHistory","resumeObj",function($scope,$state,$ionicHistory,resumeObj){
+  .controller("workControl",["$scope","$state","$ionicHistory","resumeObj","datePickObj",function($scope,$state,$ionicHistory,resumeObj,datePickObj){
     var index = parseInt($state.params.index);
     $scope.workData = resumeObj.resumeData.career[index];
     if(!$scope.workData){
@@ -128,8 +119,9 @@ mfApp
         $ionicHistory.goBack();
       }
     }
+    $scope.datePickObj = datePickObj;
   }])
-  .controller("projectControl",["$scope","$state","$ionicHistory","resumeObj",function($scope,$state,$ionicHistory,resumeObj){
+  .controller("projectControl",["$scope","$state","$ionicHistory","resumeObj","datePickObj",function($scope,$state,$ionicHistory,resumeObj,datePickObj){
     var index = parseInt($state.params.index);
     $scope.projectData = resumeObj.resumeData.projects[index];
     if(!$scope.projectData){
@@ -152,6 +144,7 @@ mfApp
         $ionicHistory.goBack();
       }
     }
+    $scope.datePickObj = datePickObj;
   }])
   .controller("languageControl",["$scope","$state","$ionicHistory","resumeObj",function($scope,$state,$ionicHistory,resumeObj){
     var lanArr = ["普通话","粤语","英语","法语","日语"];
