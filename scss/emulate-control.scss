@@ -33,7 +33,6 @@ $controlHeight: $selectItemHeight * 5;
       //background:linear-gradient(to top, transparent, transparent 5%, white 20%, white 80%, transparent 95%, transparent);
       .e-s-scroll-box{
         height: $controlHeight;
-        overflow: hidden;
       }
       .e-select-list{
         padding: 2*$selectItemHeight 0;

@@ -23,8 +23,7 @@
       width: 100%;
       background: #ccc; }
       .emulate-select-control .emulate-select-content .emulate-select-inner .e-s-scroll-box {
-        height: 180px;
-        overflow: hidden; }
+        height: 180px; }
       .emulate-select-control .emulate-select-content .emulate-select-inner .e-select-list {
         padding: 72px 0; }
       .emulate-select-control .emulate-select-content .emulate-select-inner .e-select-item {
